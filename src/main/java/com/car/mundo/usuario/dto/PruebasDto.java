@@ -1,4 +1,4 @@
-package com.car.mundo.login.dto;
+package com.car.mundo.usuario.dto;
 
 public class PruebasDto {
 
