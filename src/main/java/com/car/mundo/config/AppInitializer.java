@@ -9,16 +9,14 @@ import org.springframework.web.servlet.DispatcherServlet;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
-import java.util.Properties;
 
-@SuppressWarnings("UnusedDeclaration")
 public class AppInitializer implements WebApplicationInitializer {
 
     private static final String CONFIG_LOCATION = "com.car.mundo.config";
-    private static final String MAPPING_URL = "/*";
-    private static final String SPRING_PROPERTIES_FILE_NAME = "spring.properties";
-    private static final String ACTIVE_PROFILE_PROPERTY_NAME = "spring.profiles.active";
-    private static final String DEFAULT_PROFILE = "dev";
+    private static final String MAPPING_URL = "/";
+//    private static final String SPRING_PROPERTIES_FILE_NAME = "spring.properties";
+//    private static final String ACTIVE_PROFILE_PROPERTY_NAME = "spring.profiles.active";
+//    private static final String DEFAULT_PROFILE = "dev";
     //private static final PropertiesLoader propertiesLoader = new PropertiesLoader();
 
     @Override

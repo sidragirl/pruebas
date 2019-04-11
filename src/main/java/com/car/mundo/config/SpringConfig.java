@@ -9,13 +9,14 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+
 @EnableWebMvc
 @ComponentScan(basePackages = "com.car.mundo")
 @Configuration
-public class SpringConfig extends WebMvcConfigurerAdapter{
+public class SpringConfig extends WebMvcConfigurationSupport {
    
     @Bean
     public ViewResolver viewResolver() {
@@ -37,18 +38,6 @@ public class SpringConfig extends WebMvcConfigurerAdapter{
              
             return dataSource;
     }
-    
-    /*
-     * <bean id="dataSource" class="oracle.jdbc.pool.OracleDataSource">
-	    <property name="dataSourceName" value="ds"/>
-	    <property name="URL" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-	    <property name="user" value="mundo"/>
-	    <property name="password" value="mundo"/>
-	</bean>	
-     * (non-Javadoc)
-     * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter#configureDefaultServletHandling(org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer)
-     */
-    
     
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {

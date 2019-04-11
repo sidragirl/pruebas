@@ -2,13 +2,15 @@ package com.car.mundo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.car.mundo.usuario.dto.LoginDto;
-import com.car.mundo.usuario.dto.PruebasDto;
+import com.car.mundo.usuario.dto.SeleccionPersonajeDto;
 import com.car.mundo.usuario.service.impl.UsuarioService;
+import com.car.mundo.usuario.view.View;
 
 @Controller
 @RequestMapping("/user")
@@ -17,29 +19,27 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView login(){
+	@RequestMapping(value = "/init", method = RequestMethod.GET)
+	public ModelAndView initForm(){
+		return new ModelAndView(View.LOGIN, "login", new LoginDto());
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ModelAndView login(@ModelAttribute("login") LoginDto loginDto){
  
-		ModelAndView model = new ModelAndView("HelloWorldPage");
+		ModelAndView model;
 		
-//		PruebasDto dto = new PruebasDto();
-//		dto.setPruebas("aaa");
-//		//model.addObject("mensaje", "hello world");
-//		model.addObject(dto);
+		Integer resultado = usuarioService.login(loginDto);
 		
-		LoginDto pruebas = new LoginDto();
-		pruebas.setPassword("elputoamo");
-		pruebas.setUsuario("master");
-		
-		Integer resultado = usuarioService.login(pruebas);
-		
-		PruebasDto dto = new PruebasDto();
+		SeleccionPersonajeDto dto = new SeleccionPersonajeDto();
 		if (resultado == 0) {
-			dto.setPruebas("login ok");
+			model = new ModelAndView(View.SELECCION_PERSONAJE);
+			dto.setMensajeError("YUJUUUUUUU");
 		} else {
-			dto.setPruebas("login ko");
+			model = new ModelAndView(View.LOGIN);
+			dto.setMensajeError("Usuario/Contraseña incorrectos");
 		}
-		//model.addObject("mensaje", "hello world");
+		
 		model.addObject(dto);
  
 		return model;
